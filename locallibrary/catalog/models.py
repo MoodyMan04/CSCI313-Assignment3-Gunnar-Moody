@@ -32,6 +32,12 @@ class Book(models.Model):
                                       '">ISBN number</a>')
     genre = models.ManyToManyField(Genre, help_text='Select a genre for this book')
 
+    def display_genre(self):
+        """Create a stirng for the genres of a Book. Required for Admin page to display genres."""
+        return ', '.join(genre.name for genre in self.genre.all()[:3])
+    
+    display_genre.short_description = 'Genre'
+
     def __str__(self) -> str:
         """Returns a string representation of a Book."""
         return self.title
@@ -85,7 +91,7 @@ class Author(models.Model):
     
 class Language(models.Model):
     """Model representing a Language."""
-    name = models.Charfield(max_length=200, unique=True, help_text='Enter the book\'s natural language.')
+    name = models.CharField(max_length=200, unique=True, help_text='Enter the book\'s natural language.')
 
     def __str__(self) -> str:
         """Returns a string representation of a Language."""
