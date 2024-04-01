@@ -82,3 +82,15 @@ class Author(models.Model):
     def get_absolute_url(self):
         """Returns the URL to access a specific Author instance."""
         return reverse('author-detail', args=[str(self.id)])
+    
+class Language(models.Model):
+    """Model representing a Language."""
+    name = models.Charfield(max_length=200, unique=True, help_text='Enter the book\'s natural language.')
+
+    def __str__(self) -> str:
+        """Returns a string representation of a Language."""
+        return self.name
+    
+    def get_absolute_url(self):
+        """Returns the url to access a particular Language instance."""
+        return reverse('language-detail', args=[str(self.id)])
