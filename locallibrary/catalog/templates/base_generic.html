@@ -36,7 +36,11 @@
                 method="post"
                 action="{% url 'admin:logout' %}"
               >
-                {% csrf_token %}
+                {% if perms.catalog.can_mark_returned %}
+                <li>
+                  <a href="{% url 'all-borrowed' %}">All Currently Borrowed</a>
+                </li>
+                {% endif %} {% csrf_token %}
                 <button type="submit" class="btn btn-link">Logout</button>
               </form>
             </li>
