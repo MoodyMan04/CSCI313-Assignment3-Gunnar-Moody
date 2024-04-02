@@ -24,6 +24,18 @@ class Genre(models.Model):
         constraints = [UniqueConstraint(Lower('name'), name='genre_name_case_insensitive_unique', 
                                         violation_error_message='Genre already exists (case insensitive match)')]
         
+class Language(models.Model):
+    """Model representing a Language."""
+    name = models.CharField(max_length=200, unique=True, help_text='Enter the book\'s natural language.')
+
+    def __str__(self) -> str:
+        """Returns a string representation of a Language."""
+        return self.name
+    
+    def get_absolute_url(self):
+        """Returns the url to access a particular Language instance."""
+        return reverse('language-detail', args=[str(self.id)])
+        
 class Book(models.Model):
     """Model representing a book (not a specific copy of a book)."""
     title = models.CharField(max_length=200)
@@ -33,6 +45,7 @@ class Book(models.Model):
                             help_text='13 Character <a href="https://www.isbn-international.org/content/what-isbn'
                                       '">ISBN number</a>')
     genre = models.ManyToManyField(Genre, help_text='Select a genre for this book')
+    language = models.ForeignKey('Language', on_delete=models.DO_NOTHING, null=True)
 
     def display_genre(self):
         """Create a stirng for the genres of a Book. Required for Admin page to display genres."""
@@ -85,7 +98,7 @@ class Author(models.Model):
     first_name = models.CharField(max_length=100)
     last_name = models.CharField(max_length=100)
     date_of_birth = models.DateField(null=True, blank=True)
-    date_of_death = models.DateField('Died', null=True, blank=True)
+    date_of_death = models.DateField('died', null=True, blank=True)
 
     class Meta:
         """Class for metadata of Author model."""
@@ -99,14 +112,3 @@ class Author(models.Model):
         """Returns the URL to access a specific Author instance."""
         return reverse('author-detail', args=[str(self.id)])
     
-class Language(models.Model):
-    """Model representing a Language."""
-    name = models.CharField(max_length=200, unique=True, help_text='Enter the book\'s natural language.')
-
-    def __str__(self) -> str:
-        """Returns a string representation of a Language."""
-        return self.name
-    
-    def get_absolute_url(self):
-        """Returns the url to access a particular Language instance."""
-        return reverse('language-detail', args=[str(self.id)])
