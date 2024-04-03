@@ -8,7 +8,7 @@
   {% for book in author.book_set.all %}
   <hr />
   {% if book.author == author %}
-  <p><strong>{{ book.title }}</strong></p>
+  <a href="{{ book.get_absolute_url }}"><strong>{{ book.title }}</strong></a>
   <p>{{ book.summary }}</p>
   {% endif %} {% endfor %} {% endblock %}
 </div>
