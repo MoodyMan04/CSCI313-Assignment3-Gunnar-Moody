@@ -2,16 +2,15 @@
 <h1>Borrowed books</h1>
 
 {% if bookinstance_list %}
-<ul>
+<div class="list-group" data-bs-theme="dark">
   {% for bookinst in bookinstance_list %}
-  <li class="{% if bookinst.is_overdue %}text-danger{% endif %}">
-    <a href="{% url 'book-detail' bookinst.book.pk %}"
-      >{{ bookinst.book.title }}</a
-    >
-    ({{ bookinst.due_back }})
-  </li>
+  <a
+    href="{% url 'book-detail' bookinst.book.pk %}"
+    class="list-group-item list-group-item-action {% if bookinst.is_overdue %}text-danger{% endif %}"
+    >{{ bookinst.book.title }} ({{ bookinst.due_back }})</a
+  >
   {% endfor %}
-</ul>
+</div>
 
 {% else %}
 <p>There are no books borrowed.</p>

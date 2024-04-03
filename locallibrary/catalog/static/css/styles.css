@@ -1,6 +1,7 @@
 .sidebar-nav {
     margin-top: 20px;
-    padding: 0;
+    margin-left: 20px;
+    padding: 1px;
     list-style: none;
   }
 
@@ -12,4 +13,17 @@
     padding: 0;
     margin: 0;
   }
+
+.black-background {
+  background-color: #0D1117;
+  color: white;
+}
+
+input, textarea, select {
+  margin: 5px;
+  border: 5px #161B22;
+  border-radius: 5px;
+  background-color: #161B22;
+  color: white;
+}
     

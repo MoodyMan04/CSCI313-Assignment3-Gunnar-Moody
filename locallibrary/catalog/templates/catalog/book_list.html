@@ -1,14 +1,15 @@
 {% extends "base_generic.html" %} {% block content %}
 <h1>Book List</h1>
 {% if book_list %}
-<ul>
+<div class="list-group" data-bs-theme="dark">
   {% for book in book_list %}
-  <li>
-    <a href="{{ book.get_absolute_url }}">{{ book.title }}</a>
-    ({{book.author}})
-  </li>
+  <a
+    href="{{ book.get_absolute_url }}"
+    class="list-group-item list-group-item-action"
+    >{{ book.title }} ({{ book.author }})</a
+  >
   {% endfor %}
-</ul>
+</div>
 {% else %}
 <p>There are no books in the library.</p>
 {% endif %} {% endblock %}
